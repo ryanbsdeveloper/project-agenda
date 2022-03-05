@@ -1,0 +1,19 @@
+{% extends 'html/base.html' %}
+
+{% block titulo %}{{request.user}} | Agenda{% endblock titulo %}
+
+{% block conteudo %}
+<br>
+{% include 'parciais/_mensagens.html' %}
+
+<h2>Olá {{request.user.first_name}} {{request.user.last_name}} </h2>
+
+<form action='{% url 'dashboard'%}' method='POST' enctype='multipart/form-data'> 
+    {% csrf_token %}
+    <table class='table'>
+        {{dados}}
+    </table>
+    <button type='submit' class="btn btn-success">Adicionar contato</button> 
+</form>
+
+{% endblock conteudo %}

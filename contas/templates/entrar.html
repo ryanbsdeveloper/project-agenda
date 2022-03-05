@@ -1,0 +1,29 @@
+{% extends 'html/base.html' %}
+
+{% block titulo %}
+Entrar | Agenda
+{% endblock titulo %}
+
+{% block conteudo %}
+    <h1 style='text-align:center;padding:10px 0px; text-shadow: 1px 1px 2px black, 0 0 5px blue;font-weight: bold;font-size:30px'>ENTRAR</h1>
+
+    {% include 'parciais/_mensagens.html' %}
+{% if not request.user.is_authenticated %}
+<form action='{% url 'entrar' %}' method='POST'>
+    {% csrf_token %}
+    <div class="form-group">
+        <labell style='font-size:20px;font-weight: bold;' >Usuario</labell>
+        <input type= "text"name='usuario' value='{{ request.POST.nome }}' class="form-control" placeholder="Nome de usuario">
+    </div>
+    <div class="form-group">
+        <labell style='font-size:20px;font-weight: bold;' >Senha</labell>
+        <input type="password" name='senha' class="form-control" placeholder="Sua Senha">
+    </div>
+    <button type="submit" class="btn btn-primary">Entrar</button>
+</form>
+{% else %}
+    <h3>Você já está logado como {{request.user}}, 
+        <a href='{% url 'sair' %}'>clique aqui</a> para sair.
+    </h3>
+{% endif %}
+{% endblock conteudo %}

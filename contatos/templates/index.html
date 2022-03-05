@@ -1,0 +1,60 @@
+{% extends 'html/base.html' %}
+
+{% block titulo %}Agenda{% endblock titulo %}
+
+{% block conteudo %}
+<br><br>
+<form method="get" action="{% url 'buscar' %}">
+  <div class="form-group row">
+    <div class="col-12">
+      <input class="form-control"
+             type="search" value="{{ request.GET.termo }}"
+             id="search-input"
+             placeholder="Pesquise o contato aqui"
+             name="termo">
+    </div>
+  </div>
+</form>
+
+{% include 'parciais/_mensagens.html' %}
+
+<h1 class="mt-5" style='padding:10px 0px; text-shadow: 1px 1px 3px gray, 0 0 0.1em gray;font-size:40px'>Minha agenda</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Nome</th>
+      <th>Sobrenome</th>
+      <th>Telefone</th>
+      <th>Categoria</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for contato in lista%}
+      <tr>
+        <td><a href="{% url 'verContato' contato.id %}"> {{contato.nome}}</a></td>
+        <td>{{contato.sobrenome}}</td>
+        <td>{{contato.telefone}}</td>
+        <td>{{contato.categoria}}</td>
+      </tr>
+     {% endfor %} 
+  </tbody>
+</table>
+
+<nav aria-label="...">
+  <ul class="pagination pagination-sm">
+    {% for pagina_num in lista.paginator.page_range %}
+      {% if pagina_num == lista.number %}
+        <li class="page-item active red">
+          <a class="page-link" href="?pagina={{ pagina_num }}">{{pagina_num}}</a>
+        </li>
+      {% else %}
+        <li class="page-item">
+          <a class="page-link" href="?pagina={{ pagina_num }}">{{pagina_num}}</a>
+        </li>
+      {% endif %}
+    {% endfor %}
+  </ul>
+</nav>
+
+{% endblock conteudo %}

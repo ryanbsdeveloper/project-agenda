@@ -1,0 +1,38 @@
+{% extends 'html/base.html' %}
+
+{% block titulo %}Cadastrar | Agenda{% endblock titulo %}
+
+{% block conteudo %}
+<h1 style='text-align:center;padding:10px 0px; text-shadow: 1px 1px 2px black, 0 0 5px blue;font-weight: bold;font-size:30px'>CADASTRAR</h1>
+
+{% include 'parciais/_mensagens.html' %}
+
+<form action='{% url 'cadastrar' %}' method='POST'>
+    {% csrf_token %}
+    <div class="form-group">
+        <label style='font-size:20px;font-weight: bold;' >Nome</label>
+        <input type="text" name='nome' value='{{ request.POST.nome }}' class="form-control" placeholder="Seu nome">
+    </div>
+    <div class="form-group">
+        <labell style='font-size:20px;font-weight: bold;' >Sobrenome</labell>
+        <input type="text" name='sobrenome' value='{{ request.POST.sobrenome }}' class="form-control" placeholder="Seu sobrenome">
+    </div>
+    <div class="form-group">
+        <labell style='font-size:20px;font-weight: bold;' >Email</labell>
+        <input type="email" name='email' value='{{ request.POST.email }}' class="form-control" placeholder="Seu email">
+    </div>
+    <div class="form-group">
+        <labell style='font-size:20px;font-weight: bold;' >Usuario</labell>
+        <input type= "text"name='usuario' value='{{ request.POST.usuario }}' class="form-control" placeholder="Nome de usuario">
+    </div>
+    <div class="form-group">
+        <labell style='font-size:20px;font-weight: bold;' >Senha</labell>
+        <input type="password" name='senha' class="form-control" placeholder="Sua Senha">
+    </div>
+    <div class="form-group">
+        <label style='font-size:20px;font-weight: bold;' >Repita a senha</label>
+        <input type="password" name='senha2' class="form-control" placeholder="Repita sua Senha">
+    </div>
+    <button type="submit" class="btn btn-primary">Cadastrar-me</button>
+    </form>
+{% endblock conteudo %}

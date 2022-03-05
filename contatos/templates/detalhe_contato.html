@@ -1,0 +1,35 @@
+{% extends 'html/base.html' %}
+
+{% block titulo %}{{contato.nome}} {{contato.sobrenome}} | Agenda{% endblock titulo %}
+
+{% block conteudo %}
+
+<h1 class="mt-5" style='font-size:40px'>{{contato.nome}} {{contato.sobrenome}}</h1>
+<dl>
+  {%if contato.foto%}
+    <dd>
+      <img src="{{contato.foto.url}}" alt="Foto da pessoa" style="max-width:200px; max-height:auto; border-radius:25%">
+    </dd>
+  {% else %}
+    <img src="media/Fotos/sem-Foto.jpg" alt="Foto da pessoa" style="max-width:200px; max-height:auto; border-radius:50%">
+  {%endif%}
+  <dt>ID</dt>
+  <dd>{{contato.nome}}</dd>
+
+  <dt>Telefone</dt>
+  <dd>{{contato.telefone}}</dd>
+
+  <dt>E-mail</dt>
+  <dd>{{contato.email}}</dd>
+
+  <dt>Data criação</dt>
+  <dd>{{contato.data_criacao|date:'d/m/Y'}}</dd>
+
+  <dt>Categoria</dt>
+  <dd>{{contato.categoria}}</dd>
+
+  <dt>Descrição</dt>
+  <dd>{{contato.descricao}}</dd>
+</dl>
+
+{% endblock conteudo %}
